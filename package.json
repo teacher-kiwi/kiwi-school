@@ -1,0 +1,29 @@
+{
+  "name": "kiwi-school",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "cd app/views/kiwi-school && npm run build && cd ../../.. && node app/app.js",
+    "dev": "nodemon app/app.js",
+    "react": "cd app/views/kiwi-school && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teacher-kiwi/kiwi-school.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teacher-kiwi/kiwi-school/issues"
+  },
+  "homepage": "https://github.com/teacher-kiwi/kiwi-school#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
