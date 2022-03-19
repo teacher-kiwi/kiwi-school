@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "cd app/views/kiwi-school && npm run build && cd ../../.. && node app/bin/www.js",
+    "start": "cd app/views/kiwi-school && npm install && npm run build && cd ../../.. && node app/bin/www.js",
     "dev": "nodemon app/bin/www.js",
     "react": "cd app/views/kiwi-school && npm start"
   },
