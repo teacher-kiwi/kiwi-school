@@ -4,5 +4,7 @@
     "es6": true,
     "node": true
   },
-  "extends": ["react-app", "eslint:recommended", "plugin:prettier/recommended"]
+  "plugins": ["prettier"],
+  "extends": ["airbnb", "plugin:prettier/recommended"],
+  "rules": { "no-console": "off" }
 }
