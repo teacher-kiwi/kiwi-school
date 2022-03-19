@@ -1,8 +1,10 @@
-require("dotenv").config();
+const dotenv = require("dotenv");
 const express = require("express");
+const path = require("path");
+
+dotenv.config();
 
 const app = express();
-const path = require("path");
 
 app.use(express.static(path.join(__dirname, "views/kiwi-school/build")));
 
