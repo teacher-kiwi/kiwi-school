@@ -1,15 +1,11 @@
-const dotenv = require("dotenv");
+require("dotenv").config();
+require("./models/index");
+
 const express = require("express");
 const path = require("path");
-const mongoose = require("mongoose");
-
-dotenv.config();
-
-mongoose.connect(process.env.MONGODB_URL);
+const login = require("./routes/login");
 
 const app = express();
-
-const login = require("./routes/login");
 
 app.use(express.json());
 app.use("/", login);
