@@ -3,6 +3,7 @@ import { Button, Form } from "react-bootstrap";
 
 export default function LoginPage() {
   const { register, handleSubmit } = useForm();
+
   const onSubmit = data => {
     console.log(JSON.stringify(data));
     fetch("/login", {
@@ -15,6 +16,7 @@ export default function LoginPage() {
       .then(data => data.json())
       .then(data => console.log(data));
   };
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Form.FloatingLabel label="이름" className="mb-3">

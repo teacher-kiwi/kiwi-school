@@ -6,7 +6,7 @@ export default function Login() {
   return (
     <Container
       fluid="sm"
-      className="text-center mt-5"
+      className="mt-5 position-absolute top-0 start-50 translate-middle-x"
       style={{ maxWidth: "330px" }}
     >
       <Tabs defaultActiveKey="login" className="mb-3">

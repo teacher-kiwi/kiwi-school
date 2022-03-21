@@ -6425,6 +6425,9 @@ fieldset:disabled .btn {
 .top-0 {
   top: 0 !important;
 }
+.top-25 {
+  top: 25% !important;
+}
 .top-50 {
   top: 50% !important;
 }
