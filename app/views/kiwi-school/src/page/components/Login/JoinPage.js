@@ -1,17 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Alert,
-  Button,
-  Form,
-  Spinner,
-  Toast,
-  ToastContainer,
-} from "react-bootstrap";
+import { Button, Form, Spinner } from "react-bootstrap";
 
-export default function JoinPage() {
-  const [msg, setMsg] = useState();
-  const [show, setShow] = useState(false);
+export default function JoinPage({ setMsg, setShow, setPage }) {
   const [loading, setLoad] = useState(false);
   const { register, handleSubmit } = useForm();
 
@@ -30,13 +21,17 @@ export default function JoinPage() {
         .then(data => {
           const { success, msg } = data;
           if (success) {
-            console.log("가입 성공");
+            setMsg("가입 성공!");
+            setShow(true);
+            setPage("login");
           } else {
             setMsg(msg);
             setShow(true);
           }
         })
-        .then(() => setLoad(false));
+        .then(() => {
+          setLoad(false);
+        });
     } else {
       setMsg("비밀번호를 확인해주세요.");
       setShow(true);
@@ -83,13 +78,6 @@ export default function JoinPage() {
           "회원가입"
         )}
       </Button>
-      <ToastContainer className="text-center position-absolute top-50 start-50 translate-middle">
-        <Toast onClose={() => setShow(false)} show={show} delay={1000} autohide>
-          <Alert variant="danger" className="m-0 h5">
-            {msg}
-          </Alert>
-        </Toast>
-      </ToastContainer>
     </Form>
   );
 }

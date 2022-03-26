@@ -1,17 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Alert,
-  Button,
-  Form,
-  Spinner,
-  Toast,
-  ToastContainer,
-} from "react-bootstrap";
+import { Button, Form, Spinner } from "react-bootstrap";
 
-export default function LoginPage() {
-  const [msg, setMsg] = useState();
-  const [show, setShow] = useState(false);
+export default function LoginPage({ setMsg, setShow }) {
   const [loading, setLoad] = useState(false);
   const { register, handleSubmit } = useForm();
 
@@ -68,14 +59,6 @@ export default function LoginPage() {
           "로그인"
         )}
       </Button>
-
-      <ToastContainer className="text-center position-absolute top-50 start-50 translate-middle">
-        <Toast onClose={() => setShow(false)} show={show} delay={1000} autohide>
-          <Alert variant="danger" className="m-0 h5">
-            {msg}
-          </Alert>
-        </Toast>
-      </ToastContainer>
     </Form>
   );
 }

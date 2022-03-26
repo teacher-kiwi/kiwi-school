@@ -1,22 +1,46 @@
-import { Container, Tab, Tabs } from "react-bootstrap";
+import { useState } from "react";
+import {
+  Alert,
+  Container,
+  Tab,
+  Tabs,
+  Toast,
+  ToastContainer,
+} from "react-bootstrap";
 import JoinPage from "./components/Login/JoinPage";
 import LoginPage from "./components/Login/LoginPage";
 
 export default function Login() {
+  const [page, setPage] = useState("login");
+  const [msg, setMsg] = useState();
+  const [show, setShow] = useState(false);
+
   return (
     <Container
       fluid="sm"
       className="mt-5 position-absolute top-0 start-50 translate-middle-x"
       style={{ maxWidth: "330px" }}
     >
-      <Tabs defaultActiveKey="login" className="mb-3">
+      <Tabs
+        className="mb-3"
+        activeKey={page}
+        onSelect={eventKey => setPage(eventKey)}
+      >
         <Tab eventKey="login" title="로그인">
-          <LoginPage></LoginPage>
+          <LoginPage setMsg={setMsg} setShow={setShow} />
         </Tab>
         <Tab eventKey="join" title="회원가입">
-          <JoinPage></JoinPage>
+          <JoinPage setMsg={setMsg} setShow={setShow} setPage={setPage} />
         </Tab>
       </Tabs>
+
+      <ToastContainer className="text-center position-absolute top-50 start-50 translate-middle">
+        <Toast onClose={() => setShow(false)} show={show} delay={1000} autohide>
+          <Alert variant="primary" className="m-0 h5">
+            {msg}
+          </Alert>
+        </Toast>
+      </ToastContainer>
     </Container>
   );
 }
