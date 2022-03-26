@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Alert,
   Container,
@@ -14,6 +15,12 @@ export default function Login() {
   const [page, setPage] = useState("login");
   const [msg, setMsg] = useState();
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    if (token) navigate("/");
+  }, [navigate]);
 
   return (
     <Container
@@ -22,6 +29,7 @@ export default function Login() {
       style={{ maxWidth: "330px" }}
     >
       <Tabs
+        fill
         className="mb-3"
         activeKey={page}
         onSelect={eventKey => setPage(eventKey)}

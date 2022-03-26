@@ -5,8 +5,8 @@ import { Button, Form, Spinner } from "react-bootstrap";
 
 export default function LoginPage({ setMsg, setShow }) {
   const [loading, setLoad] = useState(false);
-  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = data => {
     setLoad(true);
