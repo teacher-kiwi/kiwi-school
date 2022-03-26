@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const User = require("../../models/user");
 
 module.exports = {
@@ -6,7 +7,10 @@ module.exports = {
     const user = await User.findOne({ name });
     if (user) {
       if (user.password === password) {
-        res.json({ success: true });
+        const token = await jwt.sign({ name }, process.env.JWT_PRIVATE_KEY, {
+          expiresIn: 1000,
+        });
+        res.json({ success: true, token });
       } else {
         res.json({ success: false, msg: "비밀번호가 틀렸습니다." });
       }
@@ -27,7 +31,7 @@ module.exports = {
       } else {
         res.json({
           success: false,
-          msg: "명단에 이름이 없습니다. 선생님께 문의하세요.",
+          msg: "우리반 학생이 아닙니다.",
         });
       }
     }

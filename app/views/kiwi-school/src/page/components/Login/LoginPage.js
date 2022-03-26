@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Button, Form, Spinner } from "react-bootstrap";
 
 export default function LoginPage({ setMsg, setShow }) {
   const [loading, setLoad] = useState(false);
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
   const onSubmit = data => {
@@ -17,9 +19,10 @@ export default function LoginPage({ setMsg, setShow }) {
     })
       .then(data => data.json())
       .then(data => {
-        const { success, msg } = data;
+        const { success, msg, token } = data;
         if (success) {
-          console.log("로그인 성공");
+          window.localStorage.setItem("token", token);
+          navigate("/");
         } else {
           setMsg(msg);
           setShow(true);
@@ -46,7 +49,7 @@ export default function LoginPage({ setMsg, setShow }) {
           autoComplete="off"
         />
       </Form.FloatingLabel>
-      <Button size="lg" type="submit" className="w-100">
+      <Button size="lg" type="submit" className="w-100" disabled={loading}>
         {loading ? (
           <Spinner
             as="span"
