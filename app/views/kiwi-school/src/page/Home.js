@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import img from "../img/kiwi.png";
-import Index from "./components/Home/Index";
-import Korean from "./components/Home/Korean";
-import Study from "./components/Home/Study";
+import { useEffect } from "react";
+import { Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import HomeRouter from "./components/Home/HomeRouter";
+import NavBar from "./components/Home/NavBar";
 
 export default function Home() {
-  const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,73 +34,9 @@ export default function Home() {
 
   return (
     <>
-      <Navbar bg="primary" variant="dark" expand="md">
-        <Container>
-          <Navbar.Brand
-            as={Link}
-            to="/"
-            onClick={() => {
-              setToggle(false);
-            }}
-          >
-            <img
-              alt=""
-              src={img}
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-            />{" "}
-            키위스쿨
-          </Navbar.Brand>
-          <Navbar.Toggle
-            aria-controls="responsive-navbar-nav"
-            onClick={() => setToggle(p => !p)}
-          />
-          <Navbar.Collapse id="responsive-navbar-nav" in={toggle}>
-            <Nav className="me-auto">
-              <Nav.Link
-                as={Link}
-                to="study"
-                active={/^\/study*/.test(window.location.pathname)}
-                onClick={() => {
-                  setToggle(false);
-                }}
-              >
-                자율학습
-              </Nav.Link>
-              <Nav.Link
-                as={Link}
-                to="question"
-                active={/^\/question*/.test(window.location.pathname)}
-                onClick={() => {
-                  setToggle(false);
-                }}
-              >
-                질문방
-              </Nav.Link>
-              <Nav.Link
-                as={Link}
-                to="zoom"
-                active={/^\/zoom*/.test(window.location.pathname)}
-                onClick={() => {
-                  setToggle(false);
-                }}
-              >
-                화상수업
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <NavBar />
       <Container>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/study" element={<Study />} />
-          <Route path="/study/korean" element={<Korean />} />
-          <Route path="/question" element={<h1>질문방</h1>} />
-          <Route path="/zoom" element={<h1>화상수업</h1>} />
-          <Route path="/*" element={<h1>없는 페이지</h1>} />
-        </Routes>
+        <HomeRouter />
       </Container>
     </>
   );
