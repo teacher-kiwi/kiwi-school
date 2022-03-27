@@ -65,7 +65,7 @@ export default function JoinPage({ setMsg, setShow, setPage }) {
           autoComplete="off"
         />
       </Form.FloatingLabel>
-      <Button size="lg" type="submit" className="w-100" disabled={loading}>
+      <Button size="lg" type="submit" className="w-100 my-3" disabled={loading}>
         {loading ? (
           <Spinner
             as="span"

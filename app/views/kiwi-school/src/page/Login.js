@@ -25,7 +25,7 @@ export default function Login() {
   return (
     <Container
       fluid="sm"
-      className="mt-5 position-absolute top-0 start-50 translate-middle-x"
+      className="bg-light mt-5 py-3 position-absolute top-0 start-50 translate-middle-x shadow"
       style={{ maxWidth: "330px" }}
     >
       <Tabs

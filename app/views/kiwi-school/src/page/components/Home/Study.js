@@ -1,3 +1,18 @@
+import { Col, Row } from "react-bootstrap";
+import StudyCard from "./StudyCard";
+
 export default function Study() {
-  return <h1>자율학습1</h1>;
+  return (
+    <Row>
+      <Col md>
+        <StudyCard subject="국어" link="korean" />
+      </Col>
+      <Col md>
+        <StudyCard subject="국어" link="korean" />
+      </Col>
+      <Col md>
+        <StudyCard subject="국어" link="korean" />
+      </Col>
+    </Row>
+  );
 }

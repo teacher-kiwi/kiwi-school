@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import img from "../img/kiwi.png";
+import Index from "./components/Home/Index";
+import Korean from "./components/Home/Korean";
 import Study from "./components/Home/Study";
 
 export default function Home() {
@@ -62,7 +64,7 @@ export default function Home() {
               <Nav.Link
                 as={Link}
                 to="study"
-                active={window.location.pathname === "/study"}
+                active={/^\/study*/.test(window.location.pathname)}
                 onClick={() => {
                   setToggle(false);
                 }}
@@ -72,7 +74,7 @@ export default function Home() {
               <Nav.Link
                 as={Link}
                 to="question"
-                active={window.location.pathname === "/question"}
+                active={/^\/question*/.test(window.location.pathname)}
                 onClick={() => {
                   setToggle(false);
                 }}
@@ -82,7 +84,7 @@ export default function Home() {
               <Nav.Link
                 as={Link}
                 to="zoom"
-                active={window.location.pathname === "/zoom"}
+                active={/^\/zoom*/.test(window.location.pathname)}
                 onClick={() => {
                   setToggle(false);
                 }}
@@ -95,8 +97,9 @@ export default function Home() {
       </Navbar>
       <Container>
         <Routes>
-          <Route path="/" element={<h1>홈화면</h1>} />
+          <Route path="/" element={<Index />} />
           <Route path="/study" element={<Study />} />
+          <Route path="/study/korean" element={<Korean />} />
           <Route path="/question" element={<h1>질문방</h1>} />
           <Route path="/zoom" element={<h1>화상수업</h1>} />
           <Route path="/*" element={<h1>없는 페이지</h1>} />
