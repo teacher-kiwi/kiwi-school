@@ -10,7 +10,7 @@ export default function LoginPage({ setMsg, setShow }) {
 
   const onSubmit = data => {
     setLoad(true);
-    fetch("/login", {
+    fetch("/login/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -10,7 +10,7 @@ export default function Home() {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     if (token) {
-      fetch("/authorize", {
+      fetch("/login/authorize", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

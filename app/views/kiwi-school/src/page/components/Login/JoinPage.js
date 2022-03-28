@@ -10,7 +10,7 @@ export default function JoinPage({ setMsg, setShow, setPage }) {
     setLoad(true);
     const { name, password, checkPassword } = data;
     if (password === checkPassword) {
-      fetch("/join", {
+      fetch("/login/join", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

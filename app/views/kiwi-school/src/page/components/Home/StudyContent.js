@@ -1,7 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import { Card, CloseButton } from "react-bootstrap";
+import YouTube from "react-youtube";
 
-export default function StudyContent({ backPage, title, youtube }) {
+function completed(subject, id) {
+  const token = window.localStorage.getItem("token");
+  fetch("/study/complete", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ subject, id, token }),
+  })
+    .then(res => res.json())
+    .then(json => console.log(json));
+}
+
+export default function StudyContent({ subject, backPage, title, youtube }) {
   const navigate = useNavigate();
   return (
     <Card className="text-center my-3 shadow">
@@ -13,22 +27,29 @@ export default function StudyContent({ backPage, title, youtube }) {
         <h2>{title}</h2>
       </Card.Header>
       <Card.Body>
-        {youtube.map(url => (
-          <div
-            style={{
-              width: "100%",
-              paddingBottom: "56.25%",
-              position: "relative",
+        <div
+          style={{
+            width: "100%",
+            paddingBottom: "56.25%",
+            position: "relative",
+          }}
+        >
+          <YouTube
+            key={youtube}
+            videoId={youtube}
+            title="01"
+            className="w-100 h-100 position-absolute start-0"
+            opts={{
+              playerVars: {
+                modestbranding: 1,
+                rel: 0,
+                controls: 0,
+                disablekb: 1,
+              },
             }}
-          >
-            <iframe
-              key={url}
-              title="01"
-              src={`https://www.youtube.com/embed/${url}?modestbranding=1&rel=0`}
-              className="w-100 h-100 position-absolute start-0"
-            />
-          </div>
-        ))}
+            onEnd={() => completed(subject, youtube)}
+          />
+        </div>
       </Card.Body>
     </Card>
   );

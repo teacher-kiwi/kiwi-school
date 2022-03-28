@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Card, Spinner } from "react-bootstrap";
+import { Button, Card, ProgressBar, Spinner } from "react-bootstrap";
 
-export default function StudyCard({ subject, link, download }) {
+export default function StudyCard({ subject, link, download, completed }) {
   const [loading, setLoad] = useState(false);
+  const [rate, setRate] = useState();
+
+  useEffect(() => {
+    if (completed) {
+      setRate(
+        Math.ceil(
+          (completed.length /
+            (subject === "국어" ? 26 : subject === "수학" ? 46 : 1)) *
+            100,
+        ),
+      );
+    }
+  }, [subject, completed]);
+
   function downloadHandle(id) {
     setLoad(true);
     const url = new URL(`http://docs.google.com/uc?export=download&id=${id}`);
@@ -22,13 +36,14 @@ export default function StudyCard({ subject, link, download }) {
       </Card.Header>
       <Card.Body>
         <Card.Title>
-          <h3>진행률</h3>
+          <h3>학습율</h3>
         </Card.Title>
-        <Card.Text className="h1">???</Card.Text>
+        <Card.Text className="h1 mb-3">{rate}%</Card.Text>
+        <ProgressBar now={rate} animated />
         {download ? (
           <Button
             variant="outline-secondary"
-            className="mt-3"
+            className="mt-5"
             onClick={() => downloadHandle(download)}
             disabled={loading}
           >

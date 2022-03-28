@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Card, CloseButton, ListGroup } from "react-bootstrap";
+import { Badge, Card, CloseButton, ListGroup } from "react-bootstrap";
 
-export default function StudyContents({ subject, contents }) {
+export default function StudyContents({ subject, contents, completed }) {
   const navigate = useNavigate();
 
   return (
@@ -16,7 +16,7 @@ export default function StudyContents({ subject, contents }) {
       <Card.Body className="p-0">
         <ListGroup variant="flush">
           <h4>
-            {contents.map(({ title }, index) => (
+            {contents.map(({ title, youtube }, index) => (
               <ListGroup.Item
                 key={index}
                 as={Link}
@@ -25,6 +25,13 @@ export default function StudyContents({ subject, contents }) {
                 action
               >
                 {index + 1 + ". " + title}
+                {completed?.includes(youtube) ? (
+                  <Badge pill className="ms-2">
+                    완료
+                  </Badge>
+                ) : (
+                  ""
+                )}
               </ListGroup.Item>
             ))}
           </h4>
