@@ -39,6 +39,8 @@ export default function LoginPage({ setMsg, setShow }) {
           type="text"
           placeholder=" "
           autoComplete="off"
+          minLength={3}
+          maxLength={3}
         />
       </Form.FloatingLabel>
       <Form.FloatingLabel label="비밀번호" className="mb-3">
@@ -47,6 +49,13 @@ export default function LoginPage({ setMsg, setShow }) {
           type="password"
           placeholder=" "
           autoComplete="off"
+          pattern="[0-9]{4}"
+          minLength={4}
+          maxLength={4}
+          onInvalid={() => {
+            setMsg("비밀번호는 네 자리 숫자로 입력하세요.");
+            setShow(true);
+          }}
         />
       </Form.FloatingLabel>
       <Button size="lg" type="submit" className="w-100 my-3" disabled={loading}>

@@ -43,7 +43,7 @@ export default function Login() {
       </Tabs>
 
       <ToastContainer className="text-center position-absolute top-50 start-50 translate-middle">
-        <Toast onClose={() => setShow(false)} show={show} delay={1000} autohide>
+        <Toast onClose={() => setShow(false)} show={show} delay={2000} autohide>
           <Alert variant="primary" className="m-0 h5">
             {msg}
           </Alert>
