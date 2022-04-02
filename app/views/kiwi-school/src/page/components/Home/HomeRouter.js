@@ -4,6 +4,7 @@ import Index from "./Index";
 import StuedyContents from "./StudyContents";
 import Study from "./Study";
 import StudyContent from "./StudyContent";
+import Question from "./Qeustion/main";
 
 const koreanContents = [
   { title: "시를 읽고 생각이나 느낌 나누기", youtube: "3CYNKN3kMhY" },
@@ -164,7 +165,7 @@ export default function HomeRouter() {
           }
         />
       ))}
-      <Route path="/question" element={<h1>질문방</h1>} />
+      <Route path="/question" element={<Question />} />
       <Route path="/zoom" element={<h1>화상수업</h1>} />
       <Route path="/*" element={<h1>없는 페이지</h1>} />
     </Routes>
