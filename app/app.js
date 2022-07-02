@@ -22,7 +22,8 @@ app.get("/dinorun", (req, res) => {
     path.join(__dirname, "views/kiwi-school/unity/dinorun/index.html"),
   );
 });
-app.get("/fungus", (req, res) => {
+
+app.get("/funguspractice", (req, res) => {
   res.sendfile(
     path.join(__dirname, "views/kiwi-school/unity/funguspractice/index.html"),
   );

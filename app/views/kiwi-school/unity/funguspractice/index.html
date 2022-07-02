@@ -2,16 +2,13 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="content-encoding" content="gzip" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Unity WebGL Player | funguspractice</title>
   </head>
   <body style="text-align: center">
     <canvas
       id="unity-canvas"
-      width="960"
-      height="600"
-      style="width: 960px; height: 600px; background: #231f20"
+      style="width: 80%; height: auto; background: #231f20"
     ></canvas>
     <script src="Build/funguspractice.loader.js"></script>
     <script>
@@ -25,9 +22,9 @@
       }
 
       createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/funguspractice.data.unityweb",
-        frameworkUrl: "Build/funguspractice.framework.js.unityweb",
-        codeUrl: "Build/funguspractice.wasm.unityweb",
+        dataUrl: "Build/funguspractice.data",
+        frameworkUrl: "Build/funguspractice.framework.js",
+        codeUrl: "Build/funguspractice.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "funguspractice",
