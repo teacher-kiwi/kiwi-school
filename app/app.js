@@ -15,10 +15,17 @@ app.use("/", study);
 app.use("/", question);
 
 app.use(express.static(path.join(__dirname, "views/kiwi-school/build")));
-app.use(express.static(path.join(__dirname, "views/kiwi-school/dinorun")));
+app.use(express.static(path.join(__dirname, "views/kiwi-school/unity")));
 
 app.get("/dinorun", (req, res) => {
-  res.sendfile(path.join(__dirname, "views/kiwi-school/dinorun/index.html"));
+  res.sendfile(
+    path.join(__dirname, "views/kiwi-school/unity/dinorun/index.html"),
+  );
+});
+app.get("/fungus", (req, res) => {
+  res.sendfile(
+    path.join(__dirname, "views/kiwi-school/unity/funguspractice/index.html"),
+  );
 });
 app.get("*", (req, res) => {
   res.sendfile(path.join(__dirname, "views/kiwi-school/build/index.html"));
