@@ -1,7 +1,7 @@
-const app = require("../app");
+const httpServer = require("../app");
 
 const { PORT } = process.env;
 
-app.listen(PORT, () =>
-  console.log(`http://localhost:${PORT} => 서버 실행 완료`),
-);
+const handleListen = () =>
+  console.log(`http://localhost:${PORT} => 서버 실행 완료`);
+httpServer.listen(PORT, handleListen);

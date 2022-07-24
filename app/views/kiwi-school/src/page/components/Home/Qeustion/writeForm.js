@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
-export default function WriteForm({ setMsg }) {
+export default function WriteForm({ setName, setMsg, socket }) {
   const [loading, setLoad] = useState(false);
   const { register, handleSubmit, setValue } = useForm();
 
@@ -21,7 +21,9 @@ export default function WriteForm({ setMsg }) {
       .then(res => res.json())
       .then(({ success, name, data }) => {
         if (success) {
-          setMsg({ name, data });
+          // setName(name);
+          // setMsg(data);
+          socket.emit("user-send", { name, text, time });
         }
       })
       .then(() => setValue("text", ""))

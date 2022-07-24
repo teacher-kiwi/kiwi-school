@@ -1,6 +1,6 @@
 import { Row } from "react-bootstrap";
 
-export default function MyMsg({ time, text }) {
+export default function MyMsg({ time, text, deleteMsg }) {
   return (
     <Row className="d-flex m-2 justify-content-end align-items-center flex-wrap-reverse">
       <span className="w-auto">{time}</span>
@@ -12,6 +12,9 @@ export default function MyMsg({ time, text }) {
           borderTopRightRadius: "1rem",
           borderBottomLeftRadius: "1rem",
           wordBreak: "break-all",
+        }}
+        onClick={() => {
+          deleteMsg(time, text);
         }}
       >
         {text}

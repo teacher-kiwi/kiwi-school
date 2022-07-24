@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Container } from "react-bootstrap";
+import { io } from "socket.io-client";
 import MyMsg from "./myMessage";
 import OtherMsg from "./otherMessage";
 import WriteForm from "./writeForm";
+
+const socket = io();
 
 function makeTime(dateString) {
   const parsedDate = new Date(dateString);
@@ -14,9 +17,23 @@ function makeTime(dateString) {
 }
 
 export default function Question() {
+  const [name, setName] = useState();
   const [msg, setMsg] = useState([]);
+  const containerRef = useRef();
 
   useEffect(() => {
+    containerRef.current.scrollTo({
+      top:
+        containerRef.current.scrollHeight - containerRef.current.clientHeight,
+      behavior: "smooth",
+    });
+  }, [msg]);
+
+  useEffect(() => {
+    socket.on("broadcast", data => {
+      setMsg(prevMsg => [...new Set([...prevMsg, data])]);
+    });
+
     const token = window.localStorage.getItem("token");
     fetch("/question/read", {
       method: "POST",
@@ -26,12 +43,21 @@ export default function Question() {
       body: JSON.stringify({ token }),
     })
       .then(res => res.json())
-      .then(({ name, data }) => setMsg({ name, data }));
+      .then(({ name, data }) => {
+        setName(name);
+        setMsg(data);
+      });
   }, []);
+
+  const deleteMsg = (id, name) => {
+    console.log(name);
+    console.log(id);
+  };
 
   return (
     <Container>
       <Container
+        ref={containerRef}
         className="mt-3 py-3 rounded-top h-auto"
         style={{
           backgroundColor: "#ABC1D1",
@@ -41,15 +67,23 @@ export default function Question() {
           overflow: "auto",
         }}
       >
-        {msg.data?.map(data =>
-          msg.name === data.name ? (
-            <MyMsg key={data._id} time={makeTime(data.time)} text={data.text} />
+        {msg.map((data, index) =>
+          name === data.name ? (
+            <MyMsg
+              key={index}
+              time={makeTime(data.time)}
+              text={data.text}
+              deleteMsg={deleteMsg}
+            />
           ) : (
             <OtherMsg
-              key={data._id}
+              key={index}
               writer={data.name}
               time={makeTime(data.time)}
               text={data.text}
+              onClick={() => {
+                deleteMsg(data._id, data.name);
+              }}
             />
           ),
         )}
@@ -61,7 +95,7 @@ export default function Question() {
           maxWidth: "1000px",
         }}
       >
-        <WriteForm setMsg={setMsg} />
+        <WriteForm setName={setName} setMsg={setMsg} socket={socket} />
       </Container>
     </Container>
   );
